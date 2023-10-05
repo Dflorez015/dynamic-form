@@ -1,0 +1,104 @@
+.form__wrapper {
+  --form-padding: 2em;
+  --inputs-block-padding: 0.4em;
+  --inputs-inline-padding: 0.2em;
+  --inputs-radius: 5px;
+  --stroke-color: #4B4B4B;
+  --stroke-grey-color: #737373;
+  --stroke-light-color: #BABABA;
+  --bg-light: #BABABA;
+  --font-family: sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue';
+
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: self-start;
+  padding: var(--form-padding);
+}
+
+.form__wrapper>* {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.form__wrapper :is(label, b) {
+  font-family: var(--font-family);
+  font-size: clamp(13px, 2vw, 15px);
+  color: var(--stroke-grey-color);
+}
+
+.form__wrapper :is(input, select, textarea) {
+  outline: none !important;
+  font-family: var(--font-family);
+  font-size: clamp(14px, 2vw, 16px);
+  padding-block: var(--inputs-block-padding);
+  color: var(--stroke-color);
+  border: 1px solid var(--stroke-color);
+  padding-inline: var(--inputs-inline-padding);
+  border-radius: var(--inputs-radius);
+  transition: border-color .2s ease-out;
+}
+
+.form__wrapper :is(input, select, textarea):focus {
+  border-color: #3366CC;
+}
+
+.form__wrapper :where(input, textarea)::placeholder {
+  opacity: .7;
+}
+
+.form__wrapper :where(input, select, textarea):disabled {
+  opacity: .7 !important;
+  background-color: var(--bg-light);
+  border-color: var(--stroke-light-color);
+  color: var(--stroke-grey-color);
+}
+
+/*------------------ utils styles ------------------*/
+
+.form__row__wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--inputs-block-padding) / 2.5);
+}
+
+.form__row__wrapper> img {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  position: absolute;
+  right: 0;
+}
+
+.error__span {
+  font-family: var(--font-family);
+  color: crimson;
+  font-weight: 600;
+  font-size: clamp(10px, 2vw, 12px);
+}
+
+.btn__submit {
+  cursor: pointer;
+  font-family: var(--font-family);
+  padding-block: .6rem;
+  font-size: clamp(16px, 2vw, 18px);
+  border: none;
+  border-radius: 21px;
+  outline: none;
+  transition: scale 0.2s linear;
+}
+
+.btn__submit:not(:disabled):hover {
+  scale: 1.008;
+}
+
+.tooltip__wrapper {
+  z-index: 1;
+  color: var(--stroke-color);
+  background-color: white !important;
+  opacity: 1 !important;
+  font-family: var(--font-family);
+  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.13);
+  border-radius: 11px;
+}
