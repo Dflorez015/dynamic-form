@@ -32,10 +32,12 @@ export const InputController = ({ type, name, value, tooltipMsn, validations, ..
     )
 }
 
-export const InputCustomeController = ({ configuration, customeInputType, fieldTarget }: IInputCustomeController) => {
+export const InputCustomeController = ({ customeInputType, configuration, fieldTarget }: IInputCustomeController) => {
     return (
         <div className={styles.form__row__wrapper}>
-
+            {({
+                "modal": <></>
+            })[customeInputType]}
         </div>
     )
 }

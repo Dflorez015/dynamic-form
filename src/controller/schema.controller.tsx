@@ -31,6 +31,12 @@ export interface InputProps {
 type YupBoolean = Yup.BooleanSchema<boolean | undefined, Yup.AnyObject, boolean | undefined>
 type YupString = Yup.StringSchema<string | undefined, Yup.AnyObject, string | undefined>
 
+export interface InitialInputsConfig {
+    validationSchema: Yup.ObjectSchema<{ [x: string]: string | boolean | undefined; }, Yup.AnyObject, { [x: string]: string | boolean | undefined; }, "">
+    initialValues: Record<string, string | number | boolean>
+    inputs: InputProps[]
+}
+
 /*-------------------------------------- functions --------------------------------------*/
 
 /**
@@ -38,7 +44,7 @@ type YupString = Yup.StringSchema<string | undefined, Yup.AnyObject, string | un
  * @param {InputProps[]} forms 
  * @returns 
  */
-export const getInputs = (forms: InputProps[]) => {
+export const getInputs = (forms: InputProps[]): InitialInputsConfig => {
     let initialValues: Record<string, string | number | boolean> = {};
 
     let validationsFields: Record<string, YupBoolean | YupString> = {};
