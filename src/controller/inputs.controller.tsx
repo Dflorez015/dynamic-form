@@ -18,7 +18,7 @@ interface IInputCustomeController extends CustomeInput { }
  */
 export const InputController = ({ type, name, value, tooltipMsn, validations, ...props }: IInputController) => {
     return (
-        <div className={styles.form__row__wrapper}>
+        <div className={styles.form__row__wrapper} data-column={name}>
             {tooltipMsn ? (<IconTooltip msn={tooltipMsn} name={name} />) : null}
 
             {(
@@ -32,7 +32,7 @@ export const InputController = ({ type, name, value, tooltipMsn, validations, ..
     )
 }
 
-export const InputCustomeController = ({ customeInputType, configuration, fieldTarget }: IInputCustomeController) => {
+export const InputCustomeController = ({ customeInputType }: IInputCustomeController) => {
     return (
         <div className={styles.form__row__wrapper}>
             {({

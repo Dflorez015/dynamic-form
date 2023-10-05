@@ -13,7 +13,7 @@ export const SubmitButton = () => {
 export const IconTooltip = ({ msn, name }: { msn: string, name: string }) => {
     return (
         <>
-            <img src="/inputInformation.svg" data-tooltip-id={`tooltip-${name}`} />
+            <img src="../../inputInformation.svg" data-tooltip-id={`tooltip-${name}`} />
 
             <Tooltip id={`tooltip-${name}`} className={styles.tooltip__wrapper} variant='light' place='top-start' offset={5} openOnClick >
                 <>

@@ -1,3 +1,4 @@
+import { FormLayoutConfig } from "../components/layout";
 import { InputProps, refId } from "../controller/schema.controller";
 
 export const formulary: InputProps[] = [
@@ -40,6 +41,7 @@ export const formulary: InputProps[] = [
         name: "email",
         placeholder: "E-mail",
         value: "",
+        tooltipMsn:"aquí va el email >:c",
         validations: [
             {
                 type: "required",
@@ -185,3 +187,21 @@ export const formulary: InputProps[] = [
         ]
     },
 ]
+
+export const formularyLayout: FormLayoutConfig = {
+    numCols: 2,
+    fields: [
+        { fieldName: "user", gridColumn: "1", gridRow: "1" },
+        { fieldName: "doc", gridColumn: "2", gridRow: "1" },
+        { fieldName: "email", gridColumn: "1/-1", gridRow: "2" },
+        { fieldName: "password", gridColumn: "1", gridRow: "3" },
+        { fieldName: "passwordConfirmation", gridColumn: "2", gridRow: "3" },
+        { fieldName: "rol", gridColumn: "1", gridRow: "4" },
+        { fieldName: "mondongo", gridColumn: "2", gridRow: "4" },
+        { fieldName: "genderOther", gridColumn: "1", gridRow: "5" },
+        { fieldName: "gender", gridColumn: "2", gridRow: "5" },
+        { fieldName: "department", gridColumn: "1", gridRow: "6" },
+        { fieldName: "municipio", gridColumn: "2", gridRow: "6" },
+        { fieldName: "terms", gridColumn: "1/-1", gridRow: "7" },
+    ],
+}

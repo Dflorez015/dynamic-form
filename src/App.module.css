@@ -1,5 +1,6 @@
 .form__wrapper {
   --form-padding: 2em;
+  --form-gap: 8px;
   --inputs-block-padding: 0.4em;
   --inputs-inline-padding: 0.2em;
   --inputs-radius: 5px;
@@ -9,10 +10,10 @@
   --bg-light: #BABABA;
   --font-family: sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue';
 
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  align-items: self-start;
+  /* display: flex; */
+  /* flex-direction: column; */
+  gap: var(--form-gap);
+  /* align-items: self-start; */
   padding: var(--form-padding);
 }
 
@@ -54,6 +55,10 @@
   color: var(--stroke-grey-color);
 }
 
+.form__wrapper>div:not(:has(label)) :is(input, select, textarea) {
+  margin-top: calc(var(--form-gap) + 12px);
+}
+
 /*------------------ utils styles ------------------*/
 
 .form__row__wrapper {
@@ -63,7 +68,7 @@
   gap: calc(var(--inputs-block-padding) / 2.5);
 }
 
-.form__row__wrapper> img {
+.form__row__wrapper>img {
   cursor: pointer;
   height: 15px;
   width: 15px;
@@ -99,6 +104,6 @@
   background-color: white !important;
   opacity: 1 !important;
   font-family: var(--font-family);
-  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.13);
+  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.13);
   border-radius: 11px;
 }
