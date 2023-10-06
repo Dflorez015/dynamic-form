@@ -6,7 +6,9 @@ export const SubmitButton = () => {
     const { isValid, dirty, isSubmitting } = useFormikContext()
 
     return (
-        <button className={styles.btn__submit} disabled={!isValid || !dirty || isSubmitting} type="submit">Submit</button>
+        <div className={styles.btns__wrapper}>
+            <button className={styles.btn__submit} disabled={!isValid || !dirty || isSubmitting} type="submit">Submit</button>
+        </div>
     )
 }
 

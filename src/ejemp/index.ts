@@ -41,7 +41,7 @@ export const formulary: InputProps[] = [
         name: "email",
         placeholder: "E-mail",
         value: "",
-        tooltipMsn:"aquí va el email >:c",
+        tooltipMsn: "aquí va el email >:c",
         validations: [
             {
                 type: "required",
@@ -189,19 +189,20 @@ export const formulary: InputProps[] = [
 ]
 
 export const formularyLayout: FormLayoutConfig = {
-    numCols: 2,
+    numCols: 6,
+    justifyButtons: "center",
     fields: [
         { fieldName: "user", gridColumn: "1", gridRow: "1" },
         { fieldName: "doc", gridColumn: "2", gridRow: "1" },
-        { fieldName: "email", gridColumn: "1/-1", gridRow: "2" },
-        { fieldName: "password", gridColumn: "1", gridRow: "3" },
-        { fieldName: "passwordConfirmation", gridColumn: "2", gridRow: "3" },
-        { fieldName: "rol", gridColumn: "1", gridRow: "4" },
-        { fieldName: "mondongo", gridColumn: "2", gridRow: "4" },
-        { fieldName: "genderOther", gridColumn: "1", gridRow: "5" },
-        { fieldName: "gender", gridColumn: "2", gridRow: "5" },
-        { fieldName: "department", gridColumn: "1", gridRow: "6" },
-        { fieldName: "municipio", gridColumn: "2", gridRow: "6" },
-        { fieldName: "terms", gridColumn: "1/-1", gridRow: "7" },
+        { fieldName: "email", gridColumn: "3 / 5", gridRow: "1" },
+        { fieldName: "rol", gridColumn: "5/-1", gridRow: "1" },
+        { fieldName: "mondongo", gridColumn: "1/3", gridRow: "2" },
+        { fieldName: "department", gridColumn: "3/4", gridRow: "2" },
+        { fieldName: "municipio", gridColumn: "4/5", gridRow: "2" },
+        { fieldName: "password", gridColumn: "1/3", gridRow: "3" },
+        { fieldName: "passwordConfirmation", gridColumn: "3/5", gridRow: "3" },
+        { fieldName: "genderOther", gridColumn: "1", gridRow: "4" },
+        { fieldName: "gender", gridColumn: "2", gridRow: "4" },
+        { fieldName: "terms", gridColumn: "1/-1", gridRow: "5" },
     ],
 }

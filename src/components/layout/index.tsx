@@ -12,8 +12,9 @@ export interface ItemRowLayout {
 }
 
 export interface FormLayoutConfig {
-    numCols: number;
+    numCols: number
     fields: ItemRowLayout[]
+    justifyButtons?: "start" | "end" | "center"
 }
 
 interface IFormStyle {
@@ -29,8 +30,12 @@ export const FormStyled = styled(Form).attrs(() => ({
     align-items: start;
     grid-template-rows: repeat(auto-fill, minmax(20px, 70px));
 
+    & ${styles.btns__wrapper} {
+        background-color: red;
+    }
+
     ${({ $layoutForm }) => {
-        const { fields, numCols } = $layoutForm
+        const { fields, numCols, justifyButtons = "end" } = $layoutForm
 
         let css = `grid-template-columns: ${" 1fr".repeat(numCols)};`
 
@@ -43,6 +48,12 @@ export const FormStyled = styled(Form).attrs(() => ({
                 }
             `
         }
+
+        css += `
+            & > div.${styles.btns__wrapper} {
+                justify-content: ${justifyButtons};
+            }
+        `
 
         return css
     }}    

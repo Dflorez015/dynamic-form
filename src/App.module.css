@@ -83,10 +83,18 @@
   font-size: clamp(10px, 2vw, 12px);
 }
 
+.btns__wrapper {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  grid-column: 1/-1;
+}
+
 .btn__submit {
   cursor: pointer;
   font-family: var(--font-family);
   padding-block: .6rem;
+  padding-inline: .8rem;
   font-size: clamp(16px, 2vw, 18px);
   border: none;
   border-radius: 21px;
