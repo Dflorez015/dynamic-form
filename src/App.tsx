@@ -1,9 +1,12 @@
 import { Formik } from 'formik'
+import { useEffect, useState } from 'react'
+import { FormLayoutConfig, FormStyled } from './components/layout'
+import { SubmitButton } from './components/buttons'
+import styles from './App.module.css'
 import { InitialInputsConfig, getInputs } from './controller/schema.controller'
 import { InputController } from './controller/inputs.controller'
-import { SubmitButton } from './components/buttons'
 import { formulary, formularyLayout } from './ejemp'
-import { FormLayoutConfig, FormStyled } from './components/layout'
+import { getTextConfig } from './services'
 
 export function App() {
   // hooks
@@ -11,17 +14,24 @@ export function App() {
 
   return (
     <>
-      <DynamicForm formConfig={configForm} layoutConfig={formularyLayout}/>
+      <DynamicForm formConfig={configForm} layoutConfig={formularyLayout} />
+      <DynamicForm url='/ejemp.json' />
     </>
   )
 }
 
 /*------------------------------------------------- interface -------------------------------------------------*/
 
-interface IDynamicFormProps {
-  formConfig: InitialInputsConfig
-  layoutConfig: FormLayoutConfig
+export interface IDynamicForm {
+  formConfig?: InitialInputsConfig
+  layoutConfig?: FormLayoutConfig
 }
+
+interface IDynamicFormProps extends IDynamicForm {
+  url?: string
+}
+
+interface IFormTxtController { url: string; }
 
 /*------------------------------------------------- component -------------------------------------------------*/
 /**
@@ -29,15 +39,21 @@ interface IDynamicFormProps {
  * enlista una serie de campos ordenados con sus respectivas validaciones
  * @param {IDynamicFormProps} {formConfig}
  * @returns 
- * @example <DynamicForm formConfig={{initialValues: {name:"pedro"}, 
+ * @example <DynamicForm formConfig={{initialValues: {name:"pedro"},
  * inputs:[{name:"name", value:"", type:"text"}], validationSchema:[{ type: "required",message:"ingresar nombre"}] }}/>
+ * @example <DynamicForm url={"url"}/>
  */
-export default function DynamicForm({ formConfig: { initialValues, inputs, validationSchema }, layoutConfig }: IDynamicFormProps) {
+export default function DynamicForm({ formConfig, layoutConfig, url }: IDynamicFormProps) {
+
+  if (url) return <FormTxtController url={url} />
+
+  if (!formConfig || !layoutConfig) return <></>
+
   return (
-    <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={(values) => console.log('values', values)}>
+    <Formik initialValues={formConfig.initialValues} validationSchema={formConfig.validationSchema} onSubmit={(values) => console.log('values', values)}>
       {() => (
         <FormStyled $layoutForm={layoutConfig}>
-          {inputs.map((input) => (
+          {formConfig.inputs.map((input) => (
             <InputController {...input} key={input.name} />)
           )}
           <SubmitButton />
@@ -47,4 +63,32 @@ export default function DynamicForm({ formConfig: { initialValues, inputs, valid
   )
 }
 
+/**
+ * componente de formulario dinámico.
+ * que lee una url y renderiza su contenido si es un objeto válido
+ * @param {IFormTxtController} {url} 
+ * @returns 
+ * @example <DynamicForm url='/ejemp.json' />
+ */
+export const FormTxtController = ({ url }: IFormTxtController) => {
+  const [config, setConfig] = useState<string | IDynamicForm>()
 
+  useEffect(() => {
+    try {
+      getTextConfig(url).then((res) => {
+
+        setConfig(res)
+      })
+    } catch (e) {
+      setConfig("Oops!, algo salió mal")
+    }
+  }, [url])
+
+  if (typeof config === "string") return <span className={styles.error__span}>{config}</span>
+
+  if (!config) return <></>
+
+  return (
+    <DynamicForm formConfig={config.formConfig} layoutConfig={config.layoutConfig} />
+  )
+}

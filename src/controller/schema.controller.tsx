@@ -45,6 +45,7 @@ export interface InitialInputsConfig {
  * @returns 
  */
 export const getInputs = (forms: InputProps[]): InitialInputsConfig => {
+
     let initialValues: Record<string, string | number | boolean> = {};
 
     let validationsFields: Record<string, YupBoolean | YupString> = {};

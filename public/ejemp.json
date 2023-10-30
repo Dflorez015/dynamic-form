@@ -1,0 +1,58 @@
+{
+    "formulary": [
+        {
+            "type": "number",
+            "name": "doc",
+            "placeholder": "user id",
+            "value": "",
+            "validations": [
+                {
+                    "type": "minLength",
+                    "value": 3,
+                    "message": "Min. 3 characters"
+                },
+                {
+                    "type": "maxLength",
+                    "value": 8,
+                    "message": "Max. 8 characters"
+                },
+                {
+                    "type": "required",
+                    "message": "user id is required"
+                }
+            ]
+        },
+        {
+            "type": "text",
+            "name": "user",
+            "label": "Nombre do macaco",
+            "placeholder": "Usuario",
+            "value": "",
+            "validations": [
+                {
+                    "type": "requiredUntil",
+                    "message": "llena el otro campo",
+                    "ref": "doc",
+                    "value": "some"
+                }
+            ],
+            "tooltipMsn": "<h1>Wagh<h1/>"
+        }
+    ],
+    "formularyLayout": {
+        "numCols": 2,
+        "justifyButtons": "center",
+        "fields": [
+            {
+                "fieldName": "user",
+                "gridColumn": "1",
+                "gridRow": "1"
+            },
+            {
+                "fieldName": "doc",
+                "gridColumn": "2",
+                "gridRow": "1"
+            }
+        ]
+    }
+}
