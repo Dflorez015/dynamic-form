@@ -15,7 +15,7 @@ export function App() {
   return (
     <>
       <DynamicForm formConfig={configForm} layoutConfig={formularyLayout} />
-      <DynamicForm url='/ejemp.json' />
+      <DynamicForm url='http://localhost:8080/task/aws' />
     </>
   )
 }
