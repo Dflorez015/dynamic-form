@@ -14,13 +14,15 @@ export function App() {
 
   return (
     <>
-      <DynamicForm formConfig={configForm} layoutConfig={formularyLayout} />
-      <DynamicForm url='http://localhost:8080/task/aws' />
+      <DynamicForm formConfig={configForm} layoutConfig={formularyLayout} handleSubmit={(data) => console.log('data', data)} />
+      <DynamicForm url='http://localhost:8080/task/aws' handleSubmit={(data) => console.log('data', data)} />
     </>
   )
 }
 
 /*------------------------------------------------- interface -------------------------------------------------*/
+
+type FormDataType = Record<string, string | number | boolean>
 
 export interface IDynamicForm {
   formConfig?: InitialInputsConfig
@@ -28,10 +30,11 @@ export interface IDynamicForm {
 }
 
 interface IDynamicFormProps extends IDynamicForm {
+  handleSubmit?: (data: FormDataType) => void
   url?: string
 }
 
-interface IFormTxtController { url: string; }
+interface IFormTxtController { url: string, handleSubmit: (data: FormDataType) => void }
 
 /*------------------------------------------------- component -------------------------------------------------*/
 /**
@@ -43,14 +46,14 @@ interface IFormTxtController { url: string; }
  * inputs:[{name:"name", value:"", type:"text"}], validationSchema:[{ type: "required",message:"ingresar nombre"}] }}/>
  * @example <DynamicForm url={"url"}/>
  */
-export default function DynamicForm({ formConfig, layoutConfig, url }: IDynamicFormProps) {
+export default function DynamicForm({ formConfig, layoutConfig, url, handleSubmit = (data) => console.log('data', data) }: IDynamicFormProps) {
 
-  if (url) return <FormTxtController url={url} />
+  if (url) return <FormTxtController url={url} handleSubmit={handleSubmit} />
 
   if (!formConfig || !layoutConfig) return <></>
 
   return (
-    <Formik initialValues={formConfig.initialValues} validationSchema={formConfig.validationSchema} onSubmit={(values) => console.log('values', values)}>
+    <Formik initialValues={formConfig.initialValues} validationSchema={formConfig.validationSchema} onSubmit={(values) => handleSubmit(values)}>
       {() => (
         <FormStyled $layoutForm={layoutConfig}>
           {formConfig.inputs.map((input) => (
@@ -70,7 +73,7 @@ export default function DynamicForm({ formConfig, layoutConfig, url }: IDynamicF
  * @returns 
  * @example <DynamicForm url='/ejemp.json' />
  */
-export const FormTxtController = ({ url }: IFormTxtController) => {
+export const FormTxtController = ({ url ,handleSubmit}: IFormTxtController) => {
   const [config, setConfig] = useState<string | IDynamicForm>()
 
   useEffect(() => {
@@ -89,6 +92,6 @@ export const FormTxtController = ({ url }: IFormTxtController) => {
   if (!config) return <></>
 
   return (
-    <DynamicForm formConfig={config.formConfig} layoutConfig={config.layoutConfig} />
+    <DynamicForm formConfig={config.formConfig} layoutConfig={config.layoutConfig} handleSubmit={handleSubmit}/>
   )
 }

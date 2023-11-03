@@ -7,7 +7,7 @@ export const SubmitButton = () => {
 
     return (
         <div className={styles.btns__wrapper}>
-            <button className={styles.btn__submit} disabled={!isValid || !dirty || isSubmitting} type="submit">Submit</button>
+            <button className={styles.btn__submit} disabled={!isValid || !dirty || isSubmitting} type="submit">Continuar</button>
         </div>
     )
 }
