@@ -3,22 +3,10 @@ import { useEffect, useState } from 'react'
 import { FormLayoutConfig, FormStyled } from './components/layout'
 import { SubmitButton } from './components/buttons'
 import styles from './App.module.css'
-import { InitialInputsConfig, getInputs } from './controller/schema.controller'
+import { InitialInputsConfig } from './controller/schema.controller'
 import { InputController } from './controller/inputs.controller'
-import { formulary, formularyLayout } from './ejemp'
 import { getTextConfig } from './services'
 
-export function App() {
-  // hooks
-  const configForm = getInputs(formulary)
-
-  return (
-    <>
-      <DynamicForm formConfig={configForm} layoutConfig={formularyLayout} handleSubmit={(data) => console.log('data', data)} />
-      <DynamicForm url='http://localhost:8080/task/aws' handleSubmit={(data) => console.log('data', data)} />
-    </>
-  )
-}
 
 /*------------------------------------------------- interface -------------------------------------------------*/
 
@@ -73,7 +61,7 @@ export default function DynamicForm({ formConfig, layoutConfig, url, handleSubmi
  * @returns 
  * @example <DynamicForm url='/ejemp.json' />
  */
-export const FormTxtController = ({ url ,handleSubmit}: IFormTxtController) => {
+export const FormTxtController = ({ url, handleSubmit }: IFormTxtController) => {
   const [config, setConfig] = useState<string | IDynamicForm>()
 
   useEffect(() => {
@@ -92,6 +80,6 @@ export const FormTxtController = ({ url ,handleSubmit}: IFormTxtController) => {
   if (!config) return <></>
 
   return (
-    <DynamicForm formConfig={config.formConfig} layoutConfig={config.layoutConfig} handleSubmit={handleSubmit}/>
+    <DynamicForm formConfig={config.formConfig} layoutConfig={config.layoutConfig} handleSubmit={handleSubmit} />
   )
 }
