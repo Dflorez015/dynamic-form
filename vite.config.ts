@@ -1,10 +1,22 @@
+import path from 'path'
 import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react-swc'
+import react from '@vitejs/plugin-react'
 
-// https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],preview: {
-        host: "0.0.0.0",
-        port: 3000
+  build: {
+    lib: {
+      entry: path.resolve("src", 'App.tsx'),
+      name: 'DynamicForm',
+      fileName: (format) => `DynamicForm.${format}.js`
+    },
+    rollupOptions: {
+      external: ['react', 'react-dom'],
+      output: {
+        globals: {
+          react: 'React'
+        }
       }
+    }
+  },
+  plugins: [react()]
 })

@@ -43,7 +43,7 @@ interface IFormTxtController { url: string; }
  * inputs:[{name:"name", value:"", type:"text"}], validationSchema:[{ type: "required",message:"ingresar nombre"}] }}/>
  * @example <DynamicForm url={"url"}/>
  */
-export default function DynamicForm({ formConfig, layoutConfig, url }: IDynamicFormProps) {
+export function DynamicForm({ formConfig, layoutConfig, url }: IDynamicFormProps) {
 
   if (url) return <FormTxtController url={url} />
 
