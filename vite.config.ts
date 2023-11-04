@@ -10,6 +10,7 @@ export default defineConfig({
     lib: {
       entry: path.resolve(__dirname, 'src/main.ts'),
       formats: ['es'],
+      name: '@cs3/dynamic-form',
       // name: 'DynamicForm',
       // fileName: (format) => `dynamic-form.${format}.js`
     },
